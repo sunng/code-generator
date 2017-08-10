@@ -1,0 +1,20 @@
+package $packageName;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.persistence.Id;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class $className extends BaseEntity {
+#foreach ($column in ${table.columnList})
+#if(${table.primaryKey} && ${table.primaryKey.pkNameDb} == ${column.columnNameDb})
+    @Id
+#end
+    private ${column.columnType} ${column.columnNameVariable};
+#end
+
+}

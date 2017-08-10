@@ -13,7 +13,7 @@ public class ConvertUtil {
      * @author aub
      */
     public static String convert2CamelCase(String nameInDb) {
-        StringBuilder amelCaseName = new StringBuilder();
+        StringBuilder camelCaseName = new StringBuilder();
         String[] camelCaseNamePartArr = nameInDb.split(Constant.SIGN_UNDERLINE);
         for (String enumNamePart : camelCaseNamePartArr) {
             if (enumNamePart.length() == 0) {
@@ -21,12 +21,12 @@ public class ConvertUtil {
             }
             char firstChar = enumNamePart.charAt(0);
             firstChar = toUpperCase(firstChar);
-            amelCaseName.append(firstChar);
+            camelCaseName.append(firstChar);
             if (enumNamePart.length() > 1) {
-                amelCaseName.append(enumNamePart.substring(1));
+                camelCaseName.append(enumNamePart.substring(1));
             }
         }
-        return amelCaseName.toString();
+        return camelCaseName.toString();
     }
 
     /**
@@ -37,7 +37,7 @@ public class ConvertUtil {
      * @return
      * @author aub
      */
-    public static String conver2VariableName(String camelCaseName) {
+    public static String convert2VariableName(String camelCaseName) {
         char firstChar = camelCaseName.charAt(0);
         firstChar = toLowerCase(firstChar);
         StringBuilder result = new StringBuilder();
@@ -56,7 +56,7 @@ public class ConvertUtil {
      * @return
      * @author aub
      */
-    public static String conver2RequestMapping(String nameInDb) {
+    public static String convert2RequestMapping(String nameInDb) {
         StringBuilder requestMapping = new StringBuilder();
         String[] requestMappingArr = nameInDb.split(Constant.SIGN_UNDERLINE);
         for (String requestMappingPart : requestMappingArr) {
@@ -76,26 +76,26 @@ public class ConvertUtil {
      * @return
      * @author aub
      */
-    public static String conver2JavaType(int dbDateType) {
+    public static String convert2JavaType(int dbDateType) {
         String javaType;
         switch (dbDateType) {
             case Types.TINYINT:
                 javaType = "short";
                 break;
             case Types.SMALLINT:
-                javaType = "short";
+                javaType = "Integer";
                 break;
             case Types.INTEGER:
-                javaType = "int";
+                javaType = "Integer";
                 break;
             case Types.BIGINT:
-                javaType = "long";
+                javaType = "Long";
                 break;
             case Types.FLOAT:
-                javaType = "float";
+                javaType = "BigDecimal";
                 break;
             case Types.DOUBLE:
-                javaType = "double";
+                javaType = "BigDecimal";
                 break;
             case Types.CHAR:
                 javaType = "String";
@@ -104,16 +104,16 @@ public class ConvertUtil {
                 javaType = "String";
                 break;
             case Types.TIME:
-                javaType = "Date";
+                javaType = "LocalDateTime";
                 break;
             case Types.DATE:
-                javaType = "Date";
+                javaType = "LocalDateTime";
                 break;
             case Types.TIMESTAMP:
-                javaType = "Date";
+                javaType = "LocalDateTime";
                 break;
             case Types.BOOLEAN:
-                javaType = "boolean";
+                javaType = "Boolean";
                 break;
             default:
                 javaType = "String";

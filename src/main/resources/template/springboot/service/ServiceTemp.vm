@@ -1,0 +1,40 @@
+package $packageName;
+
+import com.github.pagehelper.PageRowBounds;
+import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
+
+import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
+@Service
+public class $className {
+    @Resource
+    private ${table.tableNameClass}Repository ${table.tableNameVariable}Repository;
+
+    public void create(Create${table.tableNameClass}RequestDto create${table.tableNameClass}RequestDto) {
+        ${table.tableNameClass} ${table.tableNameVariable} = new ${table.tableNameClass}();
+        //TODO
+        ${table.tableNameVariable}.setCreateTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        ${table.tableNameVariable}Repository.insert(${table.tableNameVariable});
+    }
+
+    public void update(Update${table.tableNameClass}RequestDto update${table.tableNameClass}RequestDto) {
+        ${table.tableNameClass} ${table.tableNameVariable} = new ${table.tableNameClass}();
+        //TODO
+        ${table.tableNameVariable}Repository.updateByPrimaryKeySelective(${table.tableNameVariable});
+    }
+
+    public ${table.tableNameClass} queryById(int id) {
+        return ${table.tableNameVariable}Repository.selectByPrimaryKey(id);
+    }
+
+    public List<${table.tableNameClass}> list(List${table.tableNameClass}RequestDto list${table.tableNameClass}RequestDto) {
+        Example example = new Example(${table.tableNameClass}.class);
+        example.setOrderByClause(" create_time desc ");
+        return ${table.tableNameVariable}Repository.selectByExampleAndRowBounds(example,
+            new PageRowBounds(list${table.tableNameClass}RequestDto.getPageIndex(), Constant.PAGE_SIZE));
+    }
+}

@@ -1,0 +1,20 @@
+package $packageName;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.time.LocalDateTime;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class $className extends BaseResponseDto {
+
+    DtoData data = new DtoData();
+
+    @Data
+    public class DtoData {
+#foreach ($column in ${table.columnList})
+        private ${column.columnType} ${column.columnNameVariable};
+#end
+    }
+}

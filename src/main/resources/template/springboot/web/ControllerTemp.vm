@@ -1,0 +1,59 @@
+package $packageName;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.List;
+
+
+@RestController
+@RequestMapping("/${table.tableNameVariable}")
+public class $className {
+
+    @Resource
+    ${table.tableNameClass}Service ${table.tableNameVariable}Service;
+
+    @Resource
+    HttpServletRequest httpServletRequest;
+
+    @RequestMapping("/get")
+    public BaseResponseDto get(Integer id) {
+        ${table.tableNameClass} ${table.tableNameVariable} = ${table.tableNameVariable}Service.queryById(id);;
+
+        Get${table.tableNameClass}ResponseDto get${table.tableNameClass}ResponseDto = new Get${table.tableNameClass}ResponseDto();
+        //TODO
+
+        return get${table.tableNameClass}ResponseDto;
+    }
+
+    @RequestMapping("/list")
+    public BaseResponseDto list(@Valid List${table.tableNameClass}RequestDto list${table.tableNameClass}RequestDto) {
+        List<${table.tableNameClass}> ${table.tableNameVariable}List = ${table.tableNameVariable}Service.list(list${table.tableNameClass}RequestDto);
+
+        List${table.tableNameClass}ResponseDto list${table.tableNameClass}ResponseDto = new List${table.tableNameClass}ResponseDto();
+        for (${table.tableNameClass} ${table.tableNameVariable} : ${table.tableNameVariable}List) {
+
+            List${table.tableNameClass}ResponseDto.Item item = list${table.tableNameClass}ResponseDto.new Item();
+            //TODO
+
+            list${table.tableNameClass}ResponseDto.getData().add(item);
+
+        }
+        return list${table.tableNameClass}ResponseDto;
+    }
+
+    @RequestMapping("/create")
+    public BaseResponseDto create(@Valid Create${table.tableNameClass}RequestDto create${table.tableNameClass}RequestDto) {
+        ${table.tableNameVariable}Service.create(create${table.tableNameClass}RequestDto);
+        return ResponseUtil.SUCCESS_DTO;
+    }
+
+    @RequestMapping("/update")
+    public BaseResponseDto update(@Valid Update${table.tableNameClass}RequestDto update${table.tableNameClass}RequestDto) {
+        ${table.tableNameVariable}Service.update(update${table.tableNameClass}RequestDto);
+        return ResponseUtil.SUCCESS_DTO;
+    }
+}

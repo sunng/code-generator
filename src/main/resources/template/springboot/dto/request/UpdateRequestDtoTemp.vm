@@ -1,0 +1,16 @@
+package $packageName;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.time.LocalDateTime;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class $className extends BaseRequestDto {
+#foreach ($column in ${table.columnList})
+#if(${column.columnNameDb} != 'create_time')
+    private ${column.columnType} ${column.columnNameVariable};
+#end
+#end
+}

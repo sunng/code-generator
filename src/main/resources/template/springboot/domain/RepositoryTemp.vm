@@ -1,0 +1,4 @@
+package $packageName;
+
+public interface $className extends CommonMapper<${table.tableNameClass}> {
+}

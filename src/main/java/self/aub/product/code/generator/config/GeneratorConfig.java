@@ -1,7 +1,5 @@
 package self.aub.product.code.generator.config;
 
-import self.aub.product.code.generator.bean.Layer;
-import self.aub.product.code.generator.util.Constant;
 import self.aub.product.code.generator.util.Constant.DbType;
 
 import java.util.HashMap;
@@ -10,7 +8,8 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 public class GeneratorConfig {
-    private static final HashMap<String, String> configs = new HashMap<String, String>();
+    private static final HashMap<String, String> CONFIG = new HashMap<>();
+
     private static final String CONFIG_FILE_PATH = "config";
 
     private static final String DB_URL = "db.url";
@@ -20,128 +19,66 @@ public class GeneratorConfig {
     private static final String DB_DRIVER = "db.driver";
 
     private static final String TABLE_PREFIX = "table.prefix";
-    private static final String BASE_PACKAGE = "base.package";
+    private static final String BASE_PACKAGE = "package.base";
 
-    private static final String SCHEMA = "schema";
-
-    private static final String GEN_ACT = "gen.act";
-    private static final String GEN_BIZ = "gen.biz";
-    private static final String GEN_DAO = "gen.dao";
-    private static final String GEN_PO = "gen.po";
-    private static final String GEN_TOOL = "gen.tool";
-    private static final String GEN_RESOURCE = "gen.resource";
-
-    private static final String CLASS_SUFFIX_ACT = "class.suffix.act";
-    private static final String CLASS_SUFFIX_BIZ = "class.suffix.biz";
-    private static final String CLASS_SUFFIX_DAO = "class.suffix.dao";
-    private static final String CLASS_SUFFIX_PO = "class.suffix.po";
-
+    private static final String SCHEMA = "template";
 
     private static final String OUTPUT_DIR = "output.dir";
 
-
-    private static Layer layer;
-
     public static void init() {
-        ResourceBundle resourceBundle = PropertyResourceBundle.getBundle( CONFIG_FILE_PATH );
+        ResourceBundle resourceBundle = PropertyResourceBundle.getBundle(CONFIG_FILE_PATH);
         for (String key : resourceBundle.keySet()) {
-            String value = resourceBundle.getString( key );
-            configs.put( key, value );
+            String value = resourceBundle.getString(key);
+            CONFIG.put(key, value);
         }
-        layer = new Layer( configs.get( CLASS_SUFFIX_ACT ), configs.get( CLASS_SUFFIX_BIZ ), configs.get( CLASS_SUFFIX_DAO ), configs.get( CLASS_SUFFIX_PO ) );
     }
 
     public static DbType getDbType() {
-        String dbTypeStr = configs.get( DB_TYPE );
-        return DbType.valueOf( dbTypeStr );
+        String dbTypeStr = CONFIG.get(DB_TYPE);
+        return DbType.valueOf(dbTypeStr);
     }
 
     public static String getDbDriver() {
-        return configs.get( DB_DRIVER );
+        return CONFIG.get(DB_DRIVER);
     }
 
     public static String getDbUrl() {
-        return configs.get( DB_URL );
+        return CONFIG.get(DB_URL);
     }
 
     public static String getDbUserName() {
-        return configs.get( DB_USERNAME );
+        return CONFIG.get(DB_USERNAME);
     }
 
     public static String getDbPassword() {
-        return configs.get( DB_PASSWORD );
+        return CONFIG.get(DB_PASSWORD);
     }
 
     public static String getTablePrefix() {
-        return configs.get( TABLE_PREFIX );
+        return CONFIG.get(TABLE_PREFIX);
     }
 
     public static String getBasePackage() {
-        return configs.get( BASE_PACKAGE );
+        return CONFIG.get(BASE_PACKAGE);
     }
 
     public static String getOutputDir() {
-        return configs.get( OUTPUT_DIR );
+        return CONFIG.get(OUTPUT_DIR);
     }
 
     public static String getSchema() {
-        return configs.get( SCHEMA );
+        return CONFIG.get(SCHEMA);
     }
-
-    public static boolean isGenerateAct() {
-        return configs.get( GEN_ACT ).endsWith( Constant.YES );
-    }
-
-    public static boolean isGenerateBiz() {
-        return configs.get( GEN_BIZ ).endsWith( Constant.YES );
-    }
-
-    public static boolean isGenerateDao() {
-        return configs.get( GEN_DAO ).endsWith( Constant.YES );
-    }
-
-    public static boolean isGeneratePo() {
-        return configs.get( GEN_PO ).endsWith( Constant.YES );
-    }
-
-    public static boolean isGenerateTool() {
-        return configs.get( GEN_TOOL ).endsWith( Constant.YES );
-    }
-
-    public static boolean isGenerateResource() {
-        return configs.get( GEN_RESOURCE ).endsWith( Constant.YES );
-    }
-
-    public static String getClassSuffixAct() {
-        return configs.get( CLASS_SUFFIX_ACT );
-    }
-
-    public static String getClassSuffixBiz() {
-        return configs.get( CLASS_SUFFIX_BIZ );
-    }
-
-    public static String getClassSuffixDao() {
-        return configs.get( CLASS_SUFFIX_DAO );
-    }
-
-    public static String getClassSuffixPo() {
-        return configs.get( CLASS_SUFFIX_PO );
-    }
-
-    public static Layer getLayer() {
-        return layer;
-    }
-
 
     public static void set(String key, String value) {
-        configs.put( key, value );
+        CONFIG.put(key, value);
     }
 
     public static void main(String[] args) {
         init();
-        for (Entry<String, String> entry : configs.entrySet()) {
-            System.out.print( "[" + entry.getKey() + "]	=	" );
-            System.out.println( "[" + entry.getValue() + "]" );
+        for (Entry<String, String> entry : CONFIG.entrySet()) {
+            System.out.print("[" + entry.getKey() + "] = ");
+            System.out.println("[" + entry.getValue() + "]");
         }
     }
 }
