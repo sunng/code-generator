@@ -31,15 +31,16 @@ public class $className {
 
     @RequestMapping("/list")
     public BaseResponseDto list(@Valid List${table.tableNameClass}RequestDto list${table.tableNameClass}RequestDto) {
-        List<${table.tableNameClass}> ${table.tableNameVariable}List = ${table.tableNameVariable}Service.list(list${table.tableNameClass}RequestDto);
-
         List${table.tableNameClass}ResponseDto list${table.tableNameClass}ResponseDto = new List${table.tableNameClass}ResponseDto();
+        list${table.tableNameClass}ResponseDto.getData().setPageCount(${table.tableNameVariable}Service.countPage(list${table.tableNameClass}RequestDto));
+
+        List<${table.tableNameClass}> ${table.tableNameVariable}List = ${table.tableNameVariable}Service.list(list${table.tableNameClass}RequestDto);
         for (${table.tableNameClass} ${table.tableNameVariable} : ${table.tableNameVariable}List) {
 
-            List${table.tableNameClass}ResponseDto.Item item = list${table.tableNameClass}ResponseDto.new Item();
+            List${table.tableNameClass}ResponseDto.Record record = list${table.tableNameClass}ResponseDto.new Record();
             //TODO
 
-            list${table.tableNameClass}ResponseDto.getData().add(item);
+            list${table.tableNameClass}ResponseDto.getData().getList().add(record);
 
         }
         return list${table.tableNameClass}ResponseDto;

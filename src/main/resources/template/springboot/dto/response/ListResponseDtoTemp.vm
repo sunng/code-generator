@@ -5,17 +5,25 @@ import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class $className extends BaseResponseDto {
 
-    List<Item> data = new ArrayList<>();
+    DtoData data = new DtoData();
 
     @Data
-    public class Item {
+    public class DtoData {
+        Integer pageCount;
+        ArrayList<Record> list = new ArrayList<>();
+    }
+
+    @Data
+    public class Record {
 #foreach ($column in ${table.columnList})
+#if(${column.columnType} == 'LocalDateTime')
+        @JsonFormat(pattern = Constant.TIME_PATTERN)
+#end
         private ${column.columnType} ${column.columnNameVariable};
 #end
     }

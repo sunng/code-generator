@@ -32,9 +32,20 @@ public class $className {
     }
 
     public List<${table.tableNameClass}> list(List${table.tableNameClass}RequestDto list${table.tableNameClass}RequestDto) {
-        Example example = new Example(${table.tableNameClass}.class);
-        example.setOrderByClause(" create_time desc ");
-        return ${table.tableNameVariable}Repository.selectByExampleAndRowBounds(example,
+        return ${table.tableNameVariable}Repository.selectByExampleAndRowBounds(genListQueryExample(list${table.tableNameClass}RequestDto),
             new PageRowBounds(list${table.tableNameClass}RequestDto.getPageIndex(), Constant.PAGE_SIZE));
+    }
+
+    public int countPage(List${table.tableNameClass}RequestDto list${table.tableNameClass}RequestDto) {
+        int recordCount = ${table.tableNameVariable}Repository.selectCountByExample(genListQueryExample(list${table.tableNameClass}RequestDto));
+        return (recordCount + Constant.PAGE_SIZE - 1) / Constant.PAGE_SIZE;
+    }
+
+    private Example genListQueryExample(List${table.tableNameClass}RequestDto list${table.tableNameClass}RequestDto) {
+        Example example = new Example(${table.tableNameClass}.class);
+        //TODO
+        example.setOrderByClause(" create_time desc ");
+
+        return example;
     }
 }
