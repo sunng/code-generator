@@ -27,6 +27,7 @@ public class MysqlGenerator extends Generator {
         generateLayer(table, context, REPOSITORY);
         generateLayer(table, context, SERVICE);
         generateLayer(table, context, CONTROLLER);
+        generateLayer(table, context, STATUS_ENUM);
 
         generateRequestDtoLayer(table, context);
         generateResponseDtoLayer(table, context);
@@ -49,18 +50,20 @@ public class MysqlGenerator extends Generator {
         String packageName = GeneratorConfig.getBasePackage() + SIGN_DOT + DTO_REQUEST.getPackageName() + SIGN_DOT + table.getModelName();
 
         context.put("packageName", packageName);
-        context.put("className", table.getTableNameClass() + DTO_REQUEST.getSuffix());
 
         // 输出路径
         String outputDir = GeneratorConfig.getOutputDir() + SOURCE_JAVA + packageName.replace(SIGN_DOT, SIGN_SLASH) + SIGN_SLASH;
         new File(outputDir).mkdirs();
         String filePath = outputDir + "Create" + table.getTableNameClass() + DTO_REQUEST.getSuffix() + JAVA_FILE_SUFFIX;
+        context.put("className", "Create" + table.getTableNameClass() + DTO_REQUEST.getSuffix());
         write2FileBySchema(SIGN_SLASH + DTO_REQUEST.getPackageFilePath() + SIGN_SLASH + "Create" + DTO_REQUEST.getSuffix() + "Temp.vm", context, filePath);
 
         filePath = outputDir + "Update" + table.getTableNameClass() + DTO_REQUEST.getSuffix() + JAVA_FILE_SUFFIX;
+        context.put("className", "Update" + table.getTableNameClass() + DTO_REQUEST.getSuffix());
         write2FileBySchema(SIGN_SLASH + DTO_REQUEST.getPackageFilePath() + SIGN_SLASH + "Update" + DTO_REQUEST.getSuffix() + "Temp.vm", context, filePath);
 
         filePath = outputDir + "List" + table.getTableNameClass() + DTO_REQUEST.getSuffix() + JAVA_FILE_SUFFIX;
+        context.put("className", "List" + table.getTableNameClass() + DTO_REQUEST.getSuffix());
         write2FileBySchema(SIGN_SLASH + DTO_REQUEST.getPackageFilePath() + SIGN_SLASH + "List" + DTO_REQUEST.getSuffix() + "Temp.vm", context, filePath);
     }
 
@@ -68,16 +71,17 @@ public class MysqlGenerator extends Generator {
         String packageName = GeneratorConfig.getBasePackage() + SIGN_DOT + DTO_RESPONSE.getPackageName() + SIGN_DOT + table.getModelName();
 
         context.put("packageName", packageName);
-        context.put("className", table.getTableNameClass() + DTO_RESPONSE.getSuffix());
 
         // 输出路径
         String outputDir = GeneratorConfig.getOutputDir() + SOURCE_JAVA + packageName.replace(SIGN_DOT, SIGN_SLASH) + SIGN_SLASH;
         new File(outputDir).mkdirs();
 
         String filePath = outputDir + "Get" + table.getTableNameClass() + DTO_RESPONSE.getSuffix() + JAVA_FILE_SUFFIX;
+        context.put("className", "Get" + table.getTableNameClass() + DTO_RESPONSE.getSuffix());
         write2FileBySchema(SIGN_SLASH + DTO_RESPONSE.getPackageFilePath() + SIGN_SLASH + "Get" + DTO_RESPONSE.getSuffix() + "Temp.vm", context, filePath);
 
         filePath = outputDir + "List" + table.getTableNameClass() + DTO_RESPONSE.getSuffix() + JAVA_FILE_SUFFIX;
+        context.put("className", "List" + table.getTableNameClass() + DTO_RESPONSE.getSuffix());
         write2FileBySchema(SIGN_SLASH + DTO_RESPONSE.getPackageFilePath() + SIGN_SLASH + "List" + DTO_RESPONSE.getSuffix() + "Temp.vm", context, filePath);
     }
 

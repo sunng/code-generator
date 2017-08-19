@@ -10,7 +10,11 @@ import java.time.LocalDateTime;
 public class $className extends BaseRequestDto {
 #foreach ($column in ${table.columnList})
 #if(${column.columnNameDb} != 'create_time')
+#if(${column.columnNameDb} == 'status')
+    private ${table.tableNameClass}Status ${column.columnNameVariable};
+#else
     private ${column.columnType} ${column.columnNameVariable};
+#end
 #end
 #end
 }

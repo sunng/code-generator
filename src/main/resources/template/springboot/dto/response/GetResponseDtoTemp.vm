@@ -12,9 +12,16 @@ public class $className extends BaseResponseDto {
     DtoData data = new DtoData();
 
     @Data
-    public class DtoData {
+    public static class DtoData {
 #foreach ($column in ${table.columnList})
+#if(${column.columnType} == 'LocalDateTime')
+        @JsonFormat(pattern = Constant.TIME_PATTERN)
+#end
+#if(${column.columnNameDb} == 'status')
+        private ${table.tableNameClass}Status ${column.columnNameVariable};
+#else
         private ${column.columnType} ${column.columnNameVariable};
+#end
 #end
     }
 }

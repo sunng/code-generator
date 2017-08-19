@@ -14,7 +14,15 @@ public class $className extends BaseEntity {
 #if(${table.primaryKey} && ${table.primaryKey.pkNameDb} == ${column.columnNameDb})
     @Id
 #end
+#if(${column.columnType} == 'LocalDateTime')
+    @JsonFormat(pattern = Constant.TIME_PATTERN)
+#end
+#if(${column.columnNameDb} == 'status')
+    private ${table.tableNameClass}Status ${column.columnNameVariable};
+#else
     private ${column.columnType} ${column.columnNameVariable};
+#end
+
 #end
 
 }

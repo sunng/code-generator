@@ -21,7 +21,7 @@ public class $className {
 
     @RequestMapping("/get")
     public BaseResponseDto get(Integer id) {
-        ${table.tableNameClass} ${table.tableNameVariable} = ${table.tableNameVariable}Service.queryById(id);;
+        ${table.tableNameClass} ${table.tableNameVariable} = ${table.tableNameVariable}Service.queryById(id);
 
         Get${table.tableNameClass}ResponseDto get${table.tableNameClass}ResponseDto = new Get${table.tableNameClass}ResponseDto();
         //TODO

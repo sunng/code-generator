@@ -1,0 +1,33 @@
+package $packageName;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+public enum $className implements BaseEnum {
+
+    /**
+     * {1: 正常, 2: 停用}
+     */
+    OK(1),
+    DEPRECATED(2);
+
+    private int value;
+
+    ${table.tableNameClass}Status(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    @JsonCreator
+    public static ${table.tableNameClass}Status fromValue(int value) {
+        ${table.tableNameClass}Status[] values = ${table.tableNameClass}Status.values();
+        for (${table.tableNameClass}Status ${table.tableNameVariable}Status : values) {
+            if (${table.tableNameVariable}Status.getValue() == value) {
+                return ${table.tableNameVariable}Status;
+            }
+        }
+        return null;
+    }
+}

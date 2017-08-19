@@ -26,7 +26,8 @@ public class Constant {
         DTO_REQUEST("dto.request", "RequestDto"),
         DTO_RESPONSE("dto.response", "ResponseDto"),
         ENTITY("domain", ""),
-        REPOSITORY("domain", "Repository");
+        REPOSITORY("domain", "Repository"),
+        STATUS_ENUM("enums", "Status");
 
         private final String packageName;
         private final String suffix;

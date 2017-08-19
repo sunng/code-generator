@@ -7,8 +7,12 @@ import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class $className extends BaseRequestDto {
+public class $className extends ListRequestDto {
 #foreach ($column in ${table.columnList})
+#if(${column.columnNameDb} == 'status')
+    private ${table.tableNameClass}Status ${column.columnNameVariable};
+#else
     private ${column.columnType} ${column.columnNameVariable};
+#end
 #end
 }

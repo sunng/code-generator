@@ -80,7 +80,7 @@ public class ConvertUtil {
         String javaType;
         switch (dbDateType) {
             case Types.TINYINT:
-                javaType = "short";
+                javaType = "Short";
                 break;
             case Types.SMALLINT:
                 javaType = "Integer";
