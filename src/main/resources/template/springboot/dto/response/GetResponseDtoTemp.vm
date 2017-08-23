@@ -9,7 +9,11 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 public class $className extends BaseResponseDto {
 
-    DtoData data = new DtoData();
+    DtoData data;
+
+    public $className(DtoData dtoData) {
+        this.data = dtoData;
+    }
 
     @Data
     public static class DtoData {

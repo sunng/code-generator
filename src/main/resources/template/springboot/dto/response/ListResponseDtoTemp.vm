@@ -12,11 +12,19 @@ public class $className extends BaseResponseDto {
 
     DtoData data = new DtoData();
 
+    public $className(DtoData dtoData) {
+        this.data = dtoData;
+    }
+
     @Data
     public static class DtoData {
         Integer pageCount;
-        ArrayList<Record> list = new ArrayList<>();
-    }
+        List<Record> list;
+
+        public DtoData(Integer pageCount, List<Record> list) {
+            this.pageCount = pageCount;
+            this.list = list;
+        }
 
     @Data
     public static class Record {

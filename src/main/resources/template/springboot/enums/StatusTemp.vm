@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum $className implements BaseEnum {
 
+    //TODO to be modify
     /**
      * {1: 正常, 2: 停用}
      */

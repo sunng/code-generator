@@ -16,36 +16,33 @@ public class $className {
 
     public void create(Create${table.tableNameClass}RequestDto create${table.tableNameClass}RequestDto) {
         ${table.tableNameClass} ${table.tableNameVariable} = new ${table.tableNameClass}();
-        //TODO
-        ${table.tableNameVariable}.setCreateTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-        ${table.tableNameVariable}Repository.insert(${table.tableNameVariable});
+        //TODO to be impl
+        ${table.tableNameVariable}Repository.insertSelective(${table.tableNameVariable});
     }
 
     public void update(Update${table.tableNameClass}RequestDto update${table.tableNameClass}RequestDto) {
         ${table.tableNameClass} ${table.tableNameVariable} = new ${table.tableNameClass}();
-        //TODO
+        //TODO to be impl
         ${table.tableNameVariable}Repository.updateByPrimaryKeySelective(${table.tableNameVariable});
     }
 
-    public ${table.tableNameClass} queryById(int id) {
-        return ${table.tableNameVariable}Repository.selectByPrimaryKey(id);
+    public Get${table.tableNameClass}ResponseDto.DtoData queryById(int id) {
+        ${table.tableNameClass} ${table.tableNameVariable} = ${table.tableNameVariable}Repository.selectByPrimaryKey(id);
+        return ObjectConverter.convertObject2Bean(${table.tableNameVariable}, Get${table.tableNameClass}ResponseDto.DtoData.class);;
     }
 
-    public List<${table.tableNameClass}> list(List${table.tableNameClass}RequestDto list${table.tableNameClass}RequestDto) {
-        return ${table.tableNameVariable}Repository.selectByExampleAndRowBounds(genListQueryExample(list${table.tableNameClass}RequestDto),
-            new PageRowBounds(list${table.tableNameClass}RequestDto.getPageIndex(), Constant.PAGE_SIZE));
-    }
+    public List${table.tableNameClass}ResponseDto.DtoData list(List${table.tableNameClass}RequestDto list${table.tableNameClass}RequestDto) {
 
-    public int countPage(List${table.tableNameClass}RequestDto list${table.tableNameClass}RequestDto) {
-        int recordCount = ${table.tableNameVariable}Repository.selectCountByExample(genListQueryExample(list${table.tableNameClass}RequestDto));
-        return (recordCount + Constant.PAGE_SIZE - 1) / Constant.PAGE_SIZE;
-    }
-
-    private Example genListQueryExample(List${table.tableNameClass}RequestDto list${table.tableNameClass}RequestDto) {
         Example example = new Example(${table.tableNameClass}.class);
-        //TODO
+        //TODO to be impl
         example.setOrderByClause(" create_time desc ");
 
-        return example;
+        PageRowBounds pageRowBounds = new PageRowBounds(list${table.tableNameClass}RequestDto.getPageIndex(), Constant.PAGE_SIZE);
+        List<${table.tableNameClass}> ${table.tableNameVariable}List = ${table.tableNameVariable}Repository.selectByExampleAndRowBounds(example, pageRowBounds);
+        long pageCount = (pageRowBounds.getTotal() + Constant.PAGE_SIZE - 1) / Constant.PAGE_SIZE;
+        List<List${table.tableNameClass}ResponseDto.Record> list = new ArrayList<>(${table.tableNameVariable}List.size());
+        ${table.tableNameVariable}List.forEach(${table.tableNameVariable} -> list.add(ObjectConverter.convertObject2Bean(${table.tableNameVariable}, List${table.tableNameClass}ResponseDto.Record.class)));
+
+        return new List${table.tableNameClass}ResponseDto.DtoData((int)pageCount, list);
     }
 }
