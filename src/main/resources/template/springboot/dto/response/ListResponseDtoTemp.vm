@@ -4,13 +4,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class $className extends BaseResponseDto {
 
-    DtoData data = new DtoData();
+    DtoData data;
 
     public $className(DtoData dtoData) {
         this.data = dtoData;
@@ -25,6 +25,7 @@ public class $className extends BaseResponseDto {
             this.pageCount = pageCount;
             this.list = list;
         }
+    }
 
     @Data
     public static class Record {

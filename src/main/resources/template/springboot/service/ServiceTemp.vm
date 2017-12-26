@@ -28,7 +28,7 @@ public class $className {
 
     public Get${table.tableNameClass}ResponseDto.DtoData queryById(int id) {
         ${table.tableNameClass} ${table.tableNameVariable} = ${table.tableNameVariable}Repository.selectByPrimaryKey(id);
-        return ObjectConverter.convertObject2Bean(${table.tableNameVariable}, Get${table.tableNameClass}ResponseDto.DtoData.class);;
+        return ObjectConverter.convertObject2Bean(${table.tableNameVariable}, Get${table.tableNameClass}ResponseDto.DtoData.class);
     }
 
     public List${table.tableNameClass}ResponseDto.DtoData list(List${table.tableNameClass}RequestDto list${table.tableNameClass}RequestDto) {
